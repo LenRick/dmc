@@ -8,6 +8,7 @@ use App\Notifications\ContactFormNotification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 
 class ContactFormController extends Controller
@@ -33,7 +34,12 @@ class ContactFormController extends Controller
         // Store the current timestamp in the session
         $request->session()->put('last_form_submission', now());
 
-        // Send notification of new contact form to admin. Test environment is currently not able to trigger this.
+        // Logs a message to the application log
+        Log::info('A new contact form has been created.');
+
+        // Send notification of new contact form to admin.
+        // ToDo: Test environment is currently not able to trigger this.
+        // ToDo: Further check which category to notify different admins.
         //Notification::route('mail', 'system@example.com')
         //    ->notify(new ContactFormNotification($newForm));
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MinWords;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreContactFormRequest extends FormRequest
@@ -23,7 +24,7 @@ class StoreContactFormRequest extends FormRequest
     {
         return [
             'subject' => 'required',
-            'message' => ['required', 'string', 'min:100'],
+            'message' => ['required', 'string', 'min:100', new MinWords()],
             'category_id' => 'required',
         ];
     }
